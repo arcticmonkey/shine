@@ -13,8 +13,16 @@ gem "devise"
 gem "bower-rails"
 gem "ffaker"
 
+# Fix Jasmin Teaspoon issue with asset pipeline
+gem 'sprockets', '3.2.0'
+gem 'sprockets-rails', '2.3.1'
+
 group :development, :test do
   gem 'byebug'
+  gem "rspec-rails", "~> 3.0"
+  gem "poltergeist"
+  gem "database_cleaner"
+  gem "teaspoon-jasmine"
 end
 
 group :development do
