@@ -12,6 +12,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem "devise"
 gem "bower-rails"
 gem "ffaker"
+gem "angular-rails-templates"
 
 # Fix Jasmin Teaspoon issue with asset pipeline
 gem 'sprockets', '3.2.0'
