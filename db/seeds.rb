@@ -1,13 +1,13 @@
-require "ffaker"
+require "faker"
 
 if Customer.all.count == 0
   350_000.times do |i|
     Customer.create!(
-      first_name: FFaker::Name.first_name,
-      last_name:  FFaker::Name.last_name,
-      username:   FFaker::Internet.user_name + i.to_s,
-      email:      FFaker::Internet.user_name + i.to_s + "@" +
-                    FFaker::Internet.domain_name
+      first_name: Faker::Name.first_name,
+      last_name:  Faker::Name.last_name,
+      username:   Faker::Internet.user_name + i.to_s,
+      email:      Faker::Internet.user_name + i.to_s + "@" +
+                    Faker::Internet.domain_name
     )
   end
 end
@@ -69,10 +69,10 @@ State.create!(name: "Wyoming"           , code: "WY")
 def create_billing_address(customer_id,num_states)
   billing_state   = State.all[rand(num_states)]
   billing_address = Address.create!(
-     street: FFaker::Address.street_address,
-       city: FFaker::Address.city,
+     street: Faker::Address.street_address,
+       city: Faker::Address.city,
       state: billing_state,
-    zipcode: FFaker::Address.zip_code
+    zipcode: Faker::Address.zip
   )
 
   CustomersBillingAddress.create!(customer_id: customer_id,
@@ -83,10 +83,10 @@ end
 def create_shipping_address(customer_id,num_states,is_primary)
   shipping_state   = State.all[rand(num_states)]
   shipping_address = Address.create!(
-       street: FFaker::Address.street_address,
-         city: FFaker::Address.city,
+       street: Faker::Address.street_address,
+         city: Faker::Address.city,
         state: shipping_state,
-      zipcode: FFaker::Address.zip_code
+      zipcode: Faker::Address.zip
   )
 
   CustomersShippingAddress.create!(customer_id: customer_id,

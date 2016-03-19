@@ -13,14 +13,14 @@
                             <div class="form-group">
                                 <label class="sr-only" for="first-name">First Name</label>
                                 <input type="text" name="first-name" value="Bob"
-                                    class="form-control">
+                                    class="form-control" ng-model="customer.first_name">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="sr-only" for="last-name">Last Name</label>
                                 <input type="text" name="last-name" value="Jones"
-                                    class="form-control">
+                                    class="form-control" ng-model="customer.last_name">
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -29,7 +29,7 @@
                                 <div class="input-group">
                                     <div class="input-group-addon">@</div>
                                     <input type="text" name="username" value="bobert123"
-                                        class="form-control">
+                                        class="form-control" ng-model="customer.username">
                                 </div>
                             </div>
                         </div>
@@ -37,7 +37,7 @@
                     <div class="form-group">
                         <label class="sr-only" for="email">Email</label>
                         <input type="text" name="email" value="bobbyj@somewhere.net"
-                            class="form-control">
+                            class="form-control" ng-model="customer.email">
                     </div>
                 </section>
                 <footer class="panel-footer">
@@ -57,35 +57,28 @@
                             Street Address
                         </label>
                         <input type="text" name="street-address" value="123 Any St"
-                            class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label class="sr-only" for="street-address-extra">
-                            Street Address Extra
-                        </label>
-                        <input type="text" name="street-address-extra" value="Unit 101"
-                            class="form-control">
+                            class="form-control" ng-model="customer.shipping_street">
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="sr-only" for="city">City</label>
                                 <input type="text" name="city" value="Washington"
-                                    class="form-control">
+                                    class="form-control" ng-model="customer.shipping_city">
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label class="sr-only" for="state">State</label>
                                 <input type="text" name="state" value="DC"
-                                    class="form-control">
+                                    class="form-control" ng-model="customer.shipping_state">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="sr-only" for="zip">Zip</label>
                                 <input type="text" name="zip" value="20001"
-                                    class="form-control">
+                                    class="form-control" ng-model="customer.shipping_zipcode">
                             </div>
                         </div>
                     </div>
@@ -101,22 +94,41 @@
                     </h2>
                 </header>
                 <section class="panel-body">
-                    <div class="row">
-                        <div class="col-md-7">
-                            <p class="h4">
-                                ****-****-****-1234
-                                <span class="label label-success">VISA</span>
-                            </p>
-                            <p>
-                                <label>Epires</label> 04/19
-                            </p>
+                    <article ng-controller="CustomerCreditCardController"
+                             ng-init="setCardholderId(customerId)">
+                        <div class="row">
+                            <div ng-if="!creditCard.$resolved">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <aside class="progress">
+                                        <div class="progress-bar progress-bar-striped active"
+                                             style="width: 100%">
+                                            Loading...
+                                        </div>
+                                    </aside>
+                                </div>
+                            </div>
+                            <div ng-if="creditCard.$resolved">
+                                <div class="col-md-7">
+                                    <p class="h4">
+                                        ****-****-****-{{ creditCard.lastFour }}
+                                        <span class="label label-success">
+                                            {{ creditCard.cardType }}
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <label>Expires</label>
+                                        {{ creditCard.expirationMonth }}/{{ creditCard.expirationYear }}
+                                    </p>
+                                </div>
+                                <div class="col-md-5 text-right">
+                                    <a href="{{creditCard.detailsLink}}"
+                                    class="btn btn-lg btn-default">
+                                        View Details...
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-5 text-right">
-                            <button class="btn btn-lg btn-default">
-                                View Details...
-                            </button>
-                        </div>
-                    </div>
+                    </article>
                     <article class="well well-sm">
                         <h1 class="h5">
                             Billing Address
@@ -129,35 +141,28 @@
                                 Street Address
                             </label>
                             <input type="text" name="street-address" value="123 Any St"
-                                class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label class="sr-only" for="street-address-extra">
-                                Street Address Extra
-                            </label>
-                            <input type="text" name="street-address-extra" value="Unit 101"
-                                class="form-control">
+                                class="form-control" ng-model="customer.billing_street">
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="sr-only" for="city">City</label>
                                     <input type="text" name="city" value="Washington"
-                                        class="form-control">
+                                        class="form-control" ng-model="customer.billing_city">
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label class="sr-only" for="state">State</label>
                                     <input type="text" name="state" value="DC"
-                                        class="form-control">
+                                        class="form-control" ng-model="customer.billing_state">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="sr-only" for="zip">Zip</label>
                                     <input type="text" name="zip" value="20001"
-                                        class="form-control">
+                                        class="form-control" ng-model="customer.billing_zipcode">
                                 </div>
                             </div>
                         </div>
@@ -167,24 +172,3 @@
         </div>
     </div>
 </form>
-
-
-
-
-
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-<article class="customer-details">
-    <h1>Customer {{ customer.id }}</h1>
-    <h2>{{ customer.first_name }} {{ customer.last_name }}</h2>
-    <h3>{{ customer.email }}</h3>
-    <h4>{{ customer.username }}</h4>
-    <h5>
-        <small class="text-uppercase">Joined</small>
-        {{ customer.created_at | date }}
-    </h5>
-</article>
