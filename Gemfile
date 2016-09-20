@@ -30,3 +30,11 @@ group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
 end
+
+group :production do
+  gem 'rails_12factor', '0.0.2'
+  gem 'puma',           '3.1.0'
+end
+ruby "2.2.4"
+
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

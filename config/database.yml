@@ -1,8 +1,9 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  username:
-  password:
+  host:     <%= ENV['IP'] %>
+  username: shine
+  password: shine
   pool: 5
 
 development:
